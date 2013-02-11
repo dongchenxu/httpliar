@@ -1,7 +1,7 @@
 package com.googlecode.httpliar.handler;
 
 /**
- * ä¯ÀÀÆ÷ ====+ ´úÀí·şÎñÆ÷ÇëÇó´¦Àí½á¹û
+ * æµè§ˆå™¨ ====+ ä»£ç†æœåŠ¡å™¨è¯·æ±‚å¤„ç†ç»“æœ
  * @author luanjia@taobao.com
  *
  */

@@ -3,7 +3,7 @@ package com.googlecode.httpliar.handler.block;
 import java.nio.charset.Charset;
 
 /**
- * JSON¿é
+ * JSONå—
  * @author luanjia@taobao.com
  *
  */

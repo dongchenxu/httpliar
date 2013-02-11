@@ -6,14 +6,14 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 /**
- * HTML¿é
+ * HTMLå—
  * @author luanjia@taobao.com
  *
  */
 public class HtmlBlock extends TextBlock {
 
 	/*
-	 * htmlÎÄµµ
+	 * htmlæ–‡æ¡£
 	 */
 	private final Document document;
 	
@@ -23,7 +23,7 @@ public class HtmlBlock extends TextBlock {
 	}
 
 	/**
-	 * »ñÈ¡µ±Ç°htmlÎÄµµ
+	 * è·å–å½“å‰htmlæ–‡æ¡£
 	 * @return
 	 */
 	public Document getDocument() {

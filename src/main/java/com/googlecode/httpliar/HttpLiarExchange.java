@@ -36,7 +36,7 @@ import com.googlecode.httpliar.mime.MIME;
 import com.googlecode.httpliar.util.HttpUtils;
 
 /**
- * HttpFilterµÄExchange
+ * HttpFilterçš„Exchange
  * @author luanjia@taobao.com
  *
  */
@@ -53,8 +53,8 @@ public class HttpLiarExchange extends CachedExchange {
 	private final Continuation _bpRequestContinuation;
 	private final OutputStream _bpOut;
 	
-	private boolean _waitForCompleted = false;	//ÊÇ·ñµÈ´ıËùÓĞchunkÍê³É
-	private Buffer _waitForCompletedBuffer;		//Êı¾İ»º´æ¶ÔÏó
+	private boolean _waitForCompleted = false;	//æ˜¯å¦ç­‰å¾…æ‰€æœ‰chunkå®Œæˆ
+	private Buffer _waitForCompletedBuffer;		//æ•°æ®ç¼“å­˜å¯¹è±¡
 
 	public HttpLiarExchange(
 			final List<HttpRequestHandler> _httpRequestHandlers,
@@ -177,7 +177,7 @@ public class HttpLiarExchange extends CachedExchange {
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				_waitForCompletedBuffer.writeTo(baos);
 				DataBlock block = new DataBlock(baos.toByteArray());
-				IO.close(baos);//ÕâÀï²»·ÅÈëµ½finally£¬¶ÄÒÔÉÏ²½ÖèÔÚÕı³£Çé¿öÏÂ²»»áÅ×³öÒì³£
+				IO.close(baos);//è¿™é‡Œä¸æ”¾å…¥åˆ°finallyï¼ŒèµŒä»¥ä¸Šæ­¥éª¤åœ¨æ­£å¸¸æƒ…å†µä¸‹ä¸ä¼šæŠ›å‡ºå¼‚å¸¸
 				try {
 					for( HttpResponseHandler respHandler : _httpResponseHandlers ) {
 						if( respHandler.isHandleResponse(this) ) {
@@ -196,7 +196,7 @@ public class HttpLiarExchange extends CachedExchange {
 				try {
 					_bpOut.write(block.getDatas());
 				}catch(EofException e) {
-					// ³öÕâÖÖ´í£¬Ö»¿ÉÄÜÊÇä¯ÀÀÆ÷¹Ø±ÕÁËÁ´½ÓËùµ¼ÖÂ
+					// å‡ºè¿™ç§é”™ï¼Œåªå¯èƒ½æ˜¯æµè§ˆå™¨å…³é—­äº†é“¾æ¥æ‰€å¯¼è‡´
 					if( !logger.isDebugEnabled() ) {
 						logger.warn("\n[WARN] : warn for \"{}\"\n  URL : {}\n", new Object[]{
 							"bTp write data occre Eof exception.",
@@ -244,7 +244,7 @@ public class HttpLiarExchange extends CachedExchange {
 	}
 	
 	/**
-	 * ´¦Àíserver ======+ proxyµÄ·µ»Ø½á¹û
+	 * å¤„ç†server ======+ proxyçš„è¿”å›ç»“æœ
 	 * @param result
 	 */
 	private void processServerToProxyResponseHandlerResult(ResponseHandlerResult result) {
@@ -257,7 +257,7 @@ public class HttpLiarExchange extends CachedExchange {
 	}
 
 	/**
-	 * ´¦Àíproxy ======+ serverµÄ·µ»Ø½á¹û
+	 * å¤„ç†proxy ======+ serverçš„è¿”å›ç»“æœ
 	 * @param result
 	 */
 	private void processProxyToServerRequestHandlerResult(RequestHandlerResult result) {
@@ -270,7 +270,7 @@ public class HttpLiarExchange extends CachedExchange {
 	}
 
 	/**
-	 * ´´½¨buffer
+	 * åˆ›å»ºbuffer
 	 * @param waitForCompleted
 	 * @return
 	 * @throws FileNotFoundException
@@ -390,7 +390,7 @@ public class HttpLiarExchange extends CachedExchange {
 	}
 	
 	/**
-	 * »ñÈ¡ÇëÇóURL×Ö·ûĞÅÏ¢
+	 * è·å–è¯·æ±‚URLå­—ç¬¦ä¿¡æ¯
 	 * @return
 	 */
 	public String getRequestURL() {

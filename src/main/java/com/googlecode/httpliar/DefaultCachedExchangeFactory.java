@@ -25,7 +25,7 @@ import com.googlecode.httpliar.handler.HttpRequestHandler;
 import com.googlecode.httpliar.handler.HttpResponseHandler;
 
 /**
- * HttpExchangeFactoryÄ¬ÈÏÊµÏÖ
+ * HttpExchangeFactoryé»˜è®¤å®ç°
  * @author luanjia@taobao.com
  *
  */
@@ -37,7 +37,7 @@ public class DefaultCachedExchangeFactory implements CachedExchangeFactory {
 	private final List<HttpResponseHandler> _httpResponseHandlers;
 	
 	/*
-	 * ´úÀí·şÎñÆ÷µ½·şÎñÆ÷Ëù½ûÖ¹µÄÇëÇóÍ·
+	 * ä»£ç†æœåŠ¡å™¨åˆ°æœåŠ¡å™¨æ‰€ç¦æ­¢çš„è¯·æ±‚å¤´
 	 */
 	private final HashSet<String> _DontProxyToServerHeaders = new HashSet<String>();
 	{
@@ -47,7 +47,7 @@ public class DefaultCachedExchangeFactory implements CachedExchangeFactory {
 	}
 	
 	/*
-	 * ´úÀí·şÎñÆ÷µ½ä¯ÀÀÆ÷Ëù½ûÖ¹µÄÓ¦´ğÍ·
+	 * ä»£ç†æœåŠ¡å™¨åˆ°æµè§ˆå™¨æ‰€ç¦æ­¢çš„åº”ç­”å¤´
 	 */
 	private final HashSet<String> _DontProxyToBrowserHeaders = new HashSet<String>();
 	{
@@ -95,7 +95,7 @@ public class DefaultCachedExchangeFactory implements CachedExchangeFactory {
 	}
 
 	/**
-	 * »ñÈ¡Á´½ÓÍ·
+	 * è·å–é“¾æ¥å¤´
 	 * @param bpRequest
 	 * @return
 	 */
@@ -112,7 +112,7 @@ public class DefaultCachedExchangeFactory implements CachedExchangeFactory {
 	}
 	
 	/**
-	 * ÉèÖÃHttpExchange
+	 * è®¾ç½®HttpExchange
 	 * @param in
 	 * @param exchange
 	 * @param httpUri
@@ -143,7 +143,7 @@ public class DefaultCachedExchangeFactory implements CachedExchangeFactory {
 	}
 
 	/**
-	 * ÉèÖÃProxy To ServerµÄÇëÇóÍ·
+	 * è®¾ç½®Proxy To Serverçš„è¯·æ±‚å¤´
 	 * @param in
 	 * @param exchange
 	 * @param request

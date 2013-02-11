@@ -22,7 +22,7 @@ import com.googlecode.httpliar.handler.TextHttpResponseHandler;
 import com.googlecode.httpliar.handler.UnCompressHttpResponseHandler;
 
 /**
- * HttpLiarÆô¶¯Æ÷
+ * HttpLiarå¯åŠ¨å™¨
  * @author luanjia@taobao.com
  *
  */
@@ -30,8 +30,8 @@ public class HttpLiarServer {
 
 	private static final Logger logger = LoggerFactory.getLogger("httpliar");
 	
-	private final int port;			//´úÀí¶Ë¿Ú
-	private final Server server;	//´úÀí·şÎñÆ÷
+	private final int port;			//ä»£ç†ç«¯å£
+	private final Server server;	//ä»£ç†æœåŠ¡å™¨
 	private final ArrayList<HttpRequestHandler> httpRequestHandlers = new ArrayList<HttpRequestHandler>();
 	private final ArrayList<HttpResponseHandler> httpResponseHandlers = new ArrayList<HttpResponseHandler>();
 	
@@ -41,7 +41,7 @@ public class HttpLiarServer {
 	}
 	
 	/**
-	 * Ö§³ÖhandlerµÄ¹¹Ôìº¯Êı
+	 * æ”¯æŒhandlerçš„æ„é€ å‡½æ•°
 	 * @param port
 	 * @param httpRequestHandlers
 	 * @param httpResponseHandlers
@@ -56,7 +56,7 @@ public class HttpLiarServer {
 	}
 	
 	/**
-	 * Æô¶¯·şÎñÆ÷
+	 * å¯åŠ¨æœåŠ¡å™¨
 	 * @throws Exception
 	 */
 	public void startProxy() throws Exception {
@@ -101,7 +101,7 @@ public class HttpLiarServer {
 	}
 	
 	/**
-	 * ¹Ø±Õ·şÎñÆ÷
+	 * å…³é—­æœåŠ¡å™¨
 	 * @throws Exception
 	 */
 	public void stopProxy() throws Exception {
@@ -113,7 +113,7 @@ public class HttpLiarServer {
 	}
 	
 	/**
-	 * ³õÊ¼HttpRequestHandler´¦ÀíÆ÷
+	 * åˆå§‹HttpRequestHandlerå¤„ç†å™¨
 	 * @param handlers
 	 */
 	private void injectHttpRequestHandlers(List<HttpRequestHandler> handlers) {
@@ -121,7 +121,7 @@ public class HttpLiarServer {
 	}
 	
 	/**
-	 * ³õÊ¼»¯HttpResponseHandler´¦ÀíÆ÷
+	 * åˆå§‹åŒ–HttpResponseHandlerå¤„ç†å™¨
 	 * @param handlers
 	 */
 	private void injectHttpResponseHandlers(List<HttpResponseHandler> handlers) {

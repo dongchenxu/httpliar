@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * JVM²Ù×÷Ïà¹Ø¹¤¾ßÀà
+ * JVMæ“ä½œç›¸å…³å·¥å…·ç±»
  * @author vlinux
  *
  */
@@ -13,14 +13,14 @@ public class JvmUtils {
 	private static final Logger logger = LoggerFactory.getLogger("greysanatomy");
 	
 	/**
-	 * ¹Ø±Õ¹³×Ó
+	 * å…³é—­é’©å­
 	 * @author vlinux
 	 *
 	 */
 	public static interface ShutdownHook {
 		
 		/**
-		 * ³¢ÊÔ¹Ø±Õ
+		 * å°è¯•å…³é—­
 		 * @throws Throwable
 		 */
 		void shutdown() throws Throwable;
@@ -28,7 +28,7 @@ public class JvmUtils {
 	}
 	
 	/**
-	 * ÏòJVM×¢²áÒ»¸ö¹Ø±ÕµÄHook
+	 * å‘JVMæ³¨å†Œä¸€ä¸ªå…³é—­çš„Hook
 	 * @param name
 	 * @param shutdownHook
 	 */

@@ -3,21 +3,21 @@ package com.googlecode.httpliar.handler;
 import com.googlecode.httpliar.HttpLiarExchange;
 
 /**
- * ÇëÇó´¦ÀíÆ÷
+ * è¯·æ±‚å¤„ç†å™¨
  * @author luanjia@taobao.com
  *
  */
 public interface HttpRequestHandler {
 
 	/**
-	 * ÅĞ¶ÏÊÇ·ñÄÜ´¦ÀíHTTPÓ¦´ğ
+	 * åˆ¤æ–­æ˜¯å¦èƒ½å¤„ç†HTTPåº”ç­”
 	 * @param exchange
 	 * @return
 	 */
 	boolean isHandleRequest(final HttpLiarExchange exchange);
 	
 	/**
-	 * ´¦ÀíÀ´×Ôä¯ÀÀÆ÷µÄÇëÇó
+	 * å¤„ç†æ¥è‡ªæµè§ˆå™¨çš„è¯·æ±‚
 	 * @param exchange
 	 * @return
 	 * @throws Exception

@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Handler处理结果
+ * Handler澶勭悊缁撴灉
  * @author luanjia@taobao.com
  *
  */
@@ -21,7 +21,7 @@ public class HandlerResult {
 	}
 	
 	/**
-	 * 设置Header中的K-V
+	 * 璁剧疆Header涓殑K-V
 	 * @param name
 	 * @param value
 	 */
@@ -30,7 +30,7 @@ public class HandlerResult {
 	}
 	
 	/**
-	 * 删除Header中指定Key
+	 * 鍒犻櫎Header涓寚瀹欿ey
 	 * @param name
 	 */
 	public void removeHeader(String name) {
@@ -38,7 +38,7 @@ public class HandlerResult {
 	}
 	
 	/**
-	 * 获取Header需要修改的Key-Value
+	 * 鑾峰彇Header闇�瑕佷慨鏀圭殑Key-Value
 	 * @return
 	 */
 	public Map<String, String> getHeaderModifier() {
@@ -46,7 +46,7 @@ public class HandlerResult {
 	}
 	
 	/**
-	 * 获取Header需要删除的Key
+	 * 鑾峰彇Header闇�瑕佸垹闄ょ殑Key
 	 * @return
 	 */
 	public Set<String> getHeaderRemover() {

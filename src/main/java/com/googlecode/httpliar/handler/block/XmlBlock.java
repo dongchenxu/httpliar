@@ -8,14 +8,14 @@ import org.jsoup.parser.Parser;
 import org.jsoup.parser.XmlTreeBuilder;
 
 /**
- * XML¿é
+ * XMLå—
  * @author luanjia@taobao.com
  *
  */
 public class XmlBlock extends TextBlock {
 
 	/*
-	 * xmlÎÄµµ
+	 * xmlæ–‡æ¡£
 	 */
 	private final Document document;
 	
@@ -25,7 +25,7 @@ public class XmlBlock extends TextBlock {
 	}
 
 	/**
-	 * »ñÈ¡µ±Ç°xmlÎÄµµ
+	 * è·å–å½“å‰xmlæ–‡æ¡£
 	 * @return
 	 */
 	public Document getDocument() {

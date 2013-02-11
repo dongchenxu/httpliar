@@ -3,13 +3,13 @@ package com.googlecode.httpliar.handler.block;
 import java.nio.charset.Charset;
 
 /**
- * ÎÄ±¾¿é
+ * æ–‡æœ¬å—
  * @author luanjia@taobao.com
  *
  */
 public class TextBlock extends DataBlock {
 
-	// ×Ö·û¼¯
+	// å­—ç¬¦é›†
 	private final Charset charset;
 	private final String text;
 	
@@ -24,7 +24,7 @@ public class TextBlock extends DataBlock {
 	}
 
 	/**
-	 * »ñÈ¡ÎÄ±¾¿éÖĞµÄÎÄ±¾ÄÚÈİ
+	 * è·å–æ–‡æœ¬å—ä¸­çš„æ–‡æœ¬å†…å®¹
 	 * @return
 	 */
 	public String getText() {
@@ -32,7 +32,7 @@ public class TextBlock extends DataBlock {
 	}
 	
 	/**
-	 * »ñÈ¡ÎÄ±¾¿éÖĞµÄ×Ö·û¼¯
+	 * è·å–æ–‡æœ¬å—ä¸­çš„å­—ç¬¦é›†
 	 * @return
 	 */
 	public Charset getCharset() {

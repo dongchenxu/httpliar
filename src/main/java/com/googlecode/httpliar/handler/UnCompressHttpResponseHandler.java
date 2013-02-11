@@ -17,7 +17,7 @@ import com.googlecode.httpliar.HttpLiarExchange;
 import com.googlecode.httpliar.handler.block.DataBlock;
 
 /**
- * ½âÑ¹Ëõ´¦Àí
+ * è§£å‹ç¼©å¤„ç†
  * @author luanjia@taobao.com
  *
  */
@@ -61,7 +61,7 @@ public class UnCompressHttpResponseHandler implements HttpResponseHandler {
 
 	
 	/**
-	 * »ñÈ¡Ñ¹Ëõ·½Ê½
+	 * è·å–å‹ç¼©æ–¹å¼
 	 * @param exchange
 	 * @return
 	 */
@@ -70,7 +70,7 @@ public class UnCompressHttpResponseHandler implements HttpResponseHandler {
 	}
 
 	/**
-	 * ´¦ÀígzipµÄÑ¹Ëõ·½Ê½
+	 * å¤„ç†gzipçš„å‹ç¼©æ–¹å¼
 	 * @throws IOException 
 	 */
 	private DataBlock unCompressGZIP(DataBlock block) throws IOException {
@@ -88,7 +88,7 @@ public class UnCompressHttpResponseHandler implements HttpResponseHandler {
 	}
 	
 	/**
-	 * ´¦ÀíInflateµÄÑ¹Ëõ·½Ê½
+	 * å¤„ç†Inflateçš„å‹ç¼©æ–¹å¼
 	 * @param block
 	 * @return
 	 * @throws IOException
@@ -114,7 +114,7 @@ public class UnCompressHttpResponseHandler implements HttpResponseHandler {
 	
 	
 	/**
-	 * Ä¨µôÓ¦´ğÍ·²¿ÖĞ¹ØÓÚ±àÂë¸ñÊ½²¿·ÖµÄ±ê¼Ç
+	 * æŠ¹æ‰åº”ç­”å¤´éƒ¨ä¸­å…³äºç¼–ç æ ¼å¼éƒ¨åˆ†çš„æ ‡è®°
 	 * @param result
 	 */
 	private void removeResponseHeader(final ResponseHandlerResult result) {

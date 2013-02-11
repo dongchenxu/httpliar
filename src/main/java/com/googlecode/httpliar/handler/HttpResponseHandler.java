@@ -4,21 +4,21 @@ import com.googlecode.httpliar.HttpLiarExchange;
 import com.googlecode.httpliar.handler.block.DataBlock;
 
 /**
- * HTTP应答处理
+ * HTTP搴旂瓟澶勭悊
  * @author luanjia@taobao.com
  *
  */
 public interface HttpResponseHandler {
 
 	/**
-	 * 判断是否能处理HTTP应答
+	 * 鍒ゆ柇鏄惁鑳藉鐞咹TTP搴旂瓟
 	 * @param exchange
 	 * @return
 	 */
 	boolean isHandleResponse(final HttpLiarExchange exchange);
 	
 	/**
-	 * 处理HTTP应答
+	 * 澶勭悊HTTP搴旂瓟
 	 * @param exchange
 	 * @param block
 	 * @return

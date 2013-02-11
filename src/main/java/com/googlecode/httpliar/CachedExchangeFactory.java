@@ -9,14 +9,14 @@ import org.eclipse.jetty.client.CachedExchange;
 import org.eclipse.jetty.http.HttpURI;
 
 /**
- * HttpExchange¹¤³§
+ * HttpExchangeå·¥åŽ‚
  * @author luanjia@taobao.com
  *
  */
 public interface CachedExchangeFactory {
 
 	/**
-	 * ´´½¨HttpExchangeÐÂÊµÀý
+	 * åˆ›å»ºHttpExchangeæ–°å®žä¾‹
 	 * @param httpUri
 	 * @param request
 	 * @param response

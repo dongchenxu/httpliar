@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.jetty.http.HttpFields;
 
 /**
- * HttpÏà¹Ø¹¤¾ßÀà
+ * Httpç›¸å…³å·¥å…·ç±»
  * @author luanjia@taobao.com
  *
  */
@@ -19,7 +19,7 @@ public class HttpUtils {
 	public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 	
 	/**
-	 * ´ÓContentTypeÖĞ»ñÈ¡×Ö·û±àÂë
+	 * ä»ContentTypeä¸­è·å–å­—ç¬¦ç¼–ç 
 	 * @param fields
 	 * @return
 	 */
@@ -29,7 +29,7 @@ public class HttpUtils {
 	}
 	
 	/**
-	 * ´ÓContentTypeµÄvalueÖĞ»ñÈ¡×Ö·û±àÂë
+	 * ä»ContentTypeçš„valueä¸­è·å–å­—ç¬¦ç¼–ç 
 	 * @param ct
 	 * @param defaultCharset
 	 * @return
@@ -52,7 +52,7 @@ public class HttpUtils {
 	}
 	
 	/**
-	 * ´ÓContentType»ñÈ¡MIMEÀàĞÍ
+	 * ä»ContentTypeè·å–MIMEç±»å‹
 	 * @param fields
 	 * @return
 	 */
@@ -67,7 +67,7 @@ public class HttpUtils {
 	}
 	
 	/**
-	 * ½âÎöuriÖĞµÄquery×Ö·û´®
+	 * è§£æuriä¸­çš„queryå­—ç¬¦ä¸²
 	 * @param uri
 	 * @return
 	 */

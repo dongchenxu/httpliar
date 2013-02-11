@@ -4,7 +4,7 @@ import com.googlecode.httpliar.handler.block.DataBlock;
 
 
 /**
- * Ó¦´ğ´¦Àí½á¹û
+ * åº”ç­”å¤„ç†ç»“æœ
  * @author luanjia@taobao.com
  *
  */
@@ -17,7 +17,7 @@ public class ResponseHandlerResult extends HandlerResult {
 	}
 
 	/**
-	 * »ñÈ¡Êı¾İ¿é
+	 * è·å–æ•°æ®å—
 	 * @return
 	 */
 	public DataBlock getBlock() {

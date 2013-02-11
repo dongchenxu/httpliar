@@ -1,13 +1,13 @@
 package com.googlecode.httpliar.handler.block;
 
 /**
- * Êı¾İ¿é
+ * æ•°æ®å—
  * @author luanjia@taobao.com
  *
  */
 public class DataBlock {
 
-	// Êı¾İ´æ´¢¿é
+	// æ•°æ®å­˜å‚¨å—
 	private final byte[] datas;
 	
 	public DataBlock(byte[] datas) {
@@ -15,7 +15,7 @@ public class DataBlock {
 	}
 
 	/**
-	 * »ñÈ¡Êı¾İ¿éÖĞµÄÊı¾İ
+	 * è·å–æ•°æ®å—ä¸­çš„æ•°æ®
 	 * @return
 	 */
 	public byte[] getDatas() {

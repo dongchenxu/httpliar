@@ -15,7 +15,7 @@ public class Launcher {
 	private static final int DEFAULT_PROXY_PORT = 9666;
 	
 	/**
-	 * 从参数中解析代理端口
+	 * 浠庡弬鏁颁腑瑙ｆ瀽浠ｇ悊绔彛
 	 * @param args
 	 * @return
 	 */

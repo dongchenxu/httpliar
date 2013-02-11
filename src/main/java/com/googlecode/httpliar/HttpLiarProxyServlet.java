@@ -32,7 +32,7 @@ import com.googlecode.httpliar.handler.HttpRequestHandler;
 import com.googlecode.httpliar.handler.HttpResponseHandler;
 
 /**
- * HttpFilter的代理服务Servlet
+ * HttpFilter鐨勪唬鐞嗘湇鍔ervlet
  * 
  * @author luanjia@taobao.com
  * 
@@ -206,7 +206,7 @@ public class HttpLiarProxyServlet implements Servlet {
 	}
 	
 	/**
-	 * 设置通讯超时时间
+	 * 璁剧疆閫氳瓒呮椂鏃堕棿
 	 * @param continuation
 	 * @param exchange
 	 */
@@ -291,7 +291,7 @@ public class HttpLiarProxyServlet implements Servlet {
 	}
 
 	/**
-	 * 获取所有的HttpRequestHandler集合
+	 * 鑾峰彇鎵�鏈夌殑HttpRequestHandler闆嗗悎
 	 * @return
 	 */
 	public List<HttpRequestHandler> getHttpRequestHandlers() {
@@ -299,7 +299,7 @@ public class HttpLiarProxyServlet implements Servlet {
 	}
 	
 	/**
-	 * 获取所有的HttpResponseHandler集合
+	 * 鑾峰彇鎵�鏈夌殑HttpResponseHandler闆嗗悎
 	 * @return
 	 */
 	public List<HttpResponseHandler> getHttpResponseHandlers() {

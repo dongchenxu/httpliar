@@ -7,7 +7,7 @@ import java.util.Collection;
 import org.apache.commons.lang.ArrayUtils;
 
 /**
- * HTTP MIME ÀàĞÍ¶¨Òå
+ * HTTP MIME ç±»å‹å®šä¹‰
  * @author luanjia@taobao.com
  *
  */
@@ -38,7 +38,7 @@ public class MIME {
 	};
 	
 	/**
-	 * ÁĞ³öËùÖ§³ÖµÄ mime
+	 * åˆ—å‡ºæ‰€æ”¯æŒçš„ mime
 	 * @return
 	 */
 	public static Collection<String> listSupports() {
@@ -52,7 +52,7 @@ public class MIME {
 	}
 	
 	/**
-	 * ÅĞ¶Ïµ±Ç°mimeÊÇ·ñÔÚÖ§³Ö·¶Î§
+	 * åˆ¤æ–­å½“å‰mimeæ˜¯å¦åœ¨æ”¯æŒèŒƒå›´
 	 * @param mime
 	 * @return
 	 */
@@ -77,7 +77,7 @@ public class MIME {
 	}
 
 	public static boolean isText(final String mime) {
-		// text ±È½ÏÌØÊâ£¬ÒòÎªhtml/css/json/xml¶¼ËãÊÇtext
+		// text æ¯”è¾ƒç‰¹æ®Šï¼Œå› ä¸ºhtml/css/json/xmléƒ½ç®—æ˜¯text
 		return ArrayUtils.contains(_TEXT, mime)
 				|| isHtml(mime)
 				|| isCss(mime)

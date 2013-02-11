@@ -18,7 +18,7 @@ import com.googlecode.httpliar.mime.MIME;
 import com.googlecode.httpliar.util.HttpUtils;
 
 /**
- * ÎÄ±¾Ó¦´ğ´¦ÀíÆ÷
+ * æ–‡æœ¬åº”ç­”å¤„ç†å™¨
  * @author luanjia@taobao.com
  *
  */
@@ -29,12 +29,12 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 	@Override
 	public boolean isHandleResponse(HttpLiarExchange exchange) {
 
-//		// ĞèÒª¶ÔÆäÄÚÈİ½øĞĞ½âÑ¹
+//		// éœ€è¦å¯¹å…¶å†…å®¹è¿›è¡Œè§£å‹
 //		if(StringUtils.isNotEmpty(exchange.getResponseFields().getStringField("Content-Encoding"))){
 //			return false;
 //		};
 		
-		// Èç¹ûµ±Ç°µÄmime²»ÔÚÔ¼¶¨mimesÖ¸¶¨·¶Î§ÄÚ£¬Ôò²»ÄÜµ±³ÉText´¦Àí
+		// å¦‚æœå½“å‰çš„mimeä¸åœ¨çº¦å®šmimesæŒ‡å®šèŒƒå›´å†…ï¼Œåˆ™ä¸èƒ½å½“æˆTextå¤„ç†
 		final String mime = HttpUtils.getMIME(exchange.getResponseFields());
 		if( !MIME.isText(mime) ) {
 			return false;
@@ -79,7 +79,7 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 		Charset htmlCharset = textBlock.getCharset();
 		
 		/*
-		 * ½âÎö <meta http-equiv="content-type" content="text/html; charset=gbk"/>
+		 * è§£æ <meta http-equiv="content-type" content="text/html; charset=gbk"/>
 		 */
 		final Element metaCtEle = doc.select("meta[HTTP-EQUIV=content-type]").first();
 		if( null != metaCtEle ) {
@@ -87,7 +87,7 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 		}
 		
 		/*
-		 * ½âÎö <meta charset="gbk"/>
+		 * è§£æ <meta charset="gbk"/>
 		 */
 		final Element metaChEle = doc.select("meta[charset]").first();
 		if( null != metaChEle ) {
@@ -99,13 +99,13 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 		}
 		
 		/*
-		 * Èç¹ûResponseµÄHeaderÖĞµÄ×Ö·û±àÂëºÍHTML-METAËùÖ¸¶¨µÄ²»Ò»Ñù
-		 * ÔòÓÃHTML-METAÖĞµÄ×Ö·û¼¯ÖØ±àÂë
+		 * å¦‚æœResponseçš„Headerä¸­çš„å­—ç¬¦ç¼–ç å’ŒHTML-METAæ‰€æŒ‡å®šçš„ä¸ä¸€æ ·
+		 * åˆ™ç”¨HTML-METAä¸­çš„å­—ç¬¦é›†é‡ç¼–ç 
 		 */
 		return textBlock.getCharset().equals(htmlCharset)
-				// ·µ»ØÔ­ÓĞµÄÎÄ±¾¿é
+				// è¿”å›åŸæœ‰çš„æ–‡æœ¬å—
 				? html
-				// HTMLÖØ±àÂë
+				// HTMLé‡ç¼–ç 
 				: new HtmlBlock(new String(block.getDatas(), htmlCharset), htmlCharset);
 	}
 	

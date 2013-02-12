@@ -27,3 +27,9 @@ Http Liar 项目是基于HTTP Proxy工作模式的一款HTTP协议拦截、篡�
 ## 数据流转
 HttpLiar是基于HttpProxy的工作模式，所以数据流转中也承担着承上启下的环节。
 ![Logo](http://pic.yupoo.com/oldmanpushcart/CDv86GpI/medish.jpg)
+
+## 内部原理
+HTTP的应答会在压缩之后拆分成多个Chunked的方式进行传递，作为一个Proxy如果不需要关注内部数据只需要将流经的数据包最快的传走即可。但对于HttpLiar而言我们需要了解和修改应答的数据，所以HttpLiar需要对流经的数据像浏览器进行整合处理。这也是HttpLiar为什么性能提升不上来的原因。
+
+
+

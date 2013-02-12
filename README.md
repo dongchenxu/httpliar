@@ -62,6 +62,8 @@ public static void main(String[] args) throws Exception {
 	
 	// 在1.0.0的版本中有一个bug，在Response的Header中忘记去掉了Content-Length
 	// 可能会导致部分浏览器进行长度校验失败，从而导致网页无法正常显示
+	// 所以在这里需要主动添加一个ResponseHandler，对Content-Length主动进行删除
+	// 在1.0.0（不含1.0.0）之后的版本中会修复这个问题
 	final List<HttpResponseHandler> handlers = new ArrayList<HttpResponseHandler>();
 	handlers.add(new HttpResponseHandler(){
 

@@ -2,6 +2,7 @@ package com.googlecode.httpliar.handler;
 
 import java.nio.charset.Charset;
 
+import org.apache.commons.lang.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
@@ -58,9 +59,23 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 		final String mime = HttpUtils.getMIME(exchange.getResponseFields());
 		final Configer configer = exchange.getConfiger();
 		
-		final TextBlock returnBlock;
+		TextBlock returnBlock;
 		if( configer.isMimeHtml(mime) ) {
 			returnBlock = convertToHtmlBlock(textBlock, block);
+			// 这里对不规范的网站进行一个校验，有些网站明着传递text/html，其实背地里做着json的勾当
+//			final String htmlStr = StringUtils.trimToEmpty(((HtmlBlock)returnBlock).getDocument().text());
+//			final String textStr = StringUtils.trimToEmpty(textBlock.getText());
+//			if( StringUtils.equals(htmlStr.replaceAll("\\s", ""), textStr.replaceAll("\\s", "")) ) {
+//				returnBlock = textBlock;
+//			}
+			/*
+			 * 这里假设所有规范的HTML页面都以
+			 * <!DOCTYPE html
+			 * 作为开头
+			 */
+			if( !StringUtils.startsWithIgnoreCase(StringUtils.trim(textBlock.getText()), "<!DOCTYPE html") ) {
+				returnBlock = textBlock;
+			}
 		} else if( configer.isMimeCss(mime) ) {
 			returnBlock = convertToCssBlock(textBlock);
 		} else if( configer.isMimeJson(mime) ) {

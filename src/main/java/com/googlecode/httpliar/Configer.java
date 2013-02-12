@@ -96,10 +96,11 @@ public class Configer {
 	 */
 	private static void parseProxyPort(final Configer cfg, final Document doc) {
 		final Element proxyPortElement = doc.select("httpliar > proxy-config > proxy-port").first();
-		if( null == proxyPortElement ) {
+		if( null != proxyPortElement ) {
+			cfg.proxyPort = NumberUtils.toInt(proxyPortElement.text(), DEFAULT_PROXY_PORT);
+		} else {
 			cfg.proxyPort = DEFAULT_PROXY_PORT;
 		}
-		cfg.proxyPort = NumberUtils.toInt(proxyPortElement.text(), DEFAULT_PROXY_PORT);
 	}
 	
 	/**

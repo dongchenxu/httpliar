@@ -56,21 +56,21 @@ HTTP的应答会在压缩之后拆分成多个Chunked的方式进行传递，作
 编写Java代码
 ```
 public static void main(String[] args) throws Exception {
-		
-  final HttpLiarServer server = new HttpLiarServer(9666);
-  
-		JvmUtils.registShutdownHook("httpliar-shutdown", new ShutdownHook(){
+	
+	final Configer configer = Configer.loadDefaultConfiger();
+	final HttpLiarServer server = new HttpLiarServer(configer);
+	
+	JvmUtils.registShutdownHook("httpliar-shutdown", new ShutdownHook(){
 
-			@Override
-			public void shutdown() throws Throwable {
-				server.stopProxy();
-			}
-			
-		});
+		@Override
+		public void shutdown() throws Throwable {
+			server.stopProxy();
+		}
 		
-		server.startProxy();
-		
-	}
+	});
+	
+	server.startProxy();
+	
 }
 ```
 

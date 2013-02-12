@@ -18,9 +18,12 @@ Http Liar 项目是基于HTTP Proxy工作模式的一款HTTP协议拦截、篡�
  - 解压数据（gzip/inflate）
  - 二进制数据支持
  - 文本数据支持
+- 数据篡改
  - 字符编码识别
  - HTML DOM操作
  - CSS/JavaScript/JSON 文本替换
 
 
 ## 数据流转
+HttpLiar是基于HttpProxy的工作模式，所以数据流转中也承担着承上启下的环节。
+![Logo](http://pic.yupoo.com/oldmanpushcart/CDv86GpI/medish.jpg)

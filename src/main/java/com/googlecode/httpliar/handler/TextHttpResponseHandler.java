@@ -7,6 +7,7 @@ import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.googlecode.httpliar.Configer;
 import com.googlecode.httpliar.HttpLiarExchange;
 import com.googlecode.httpliar.handler.block.CssBlock;
 import com.googlecode.httpliar.handler.block.DataBlock;
@@ -14,7 +15,6 @@ import com.googlecode.httpliar.handler.block.HtmlBlock;
 import com.googlecode.httpliar.handler.block.JsonBlock;
 import com.googlecode.httpliar.handler.block.TextBlock;
 import com.googlecode.httpliar.handler.block.XmlBlock;
-import com.googlecode.httpliar.mime.MIME;
 import com.googlecode.httpliar.util.HttpUtils;
 
 /**
@@ -36,7 +36,13 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 		
 		// 如果当前的mime不在约定mimes指定范围内，则不能当成Text处理
 		final String mime = HttpUtils.getMIME(exchange.getResponseFields());
-		if( !MIME.isText(mime) ) {
+		final Configer configer = exchange.getConfiger();
+		if( !configer.isMimeText(mime)
+				&& !configer.isMimeCss(mime)
+				&& !configer.isMimeHtml(mime)
+				&& !configer.isMimeJson(mime)
+				&& !configer.isMimeText(mime)
+				&& !configer.isMimeXml(mime)) {
 			return false;
 		}
 		
@@ -50,15 +56,16 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 		final Charset charset = HttpUtils.getCharset(exchange.getResponseFields(), HttpUtils.DEFAULT_CHARSET);
 		final TextBlock textBlock = new TextBlock(block.getDatas(), charset);
 		final String mime = HttpUtils.getMIME(exchange.getResponseFields());
+		final Configer configer = exchange.getConfiger();
 		
 		final TextBlock returnBlock;
-		if( MIME.isHtml(mime) ) {
+		if( configer.isMimeHtml(mime) ) {
 			returnBlock = convertToHtmlBlock(textBlock, block);
-		} else if( MIME.isCss(mime) ) {
+		} else if( configer.isMimeCss(mime) ) {
 			returnBlock = convertToCssBlock(textBlock);
-		} else if( MIME.isJson(mime) ) {
+		} else if( configer.isMimeJson(mime) ) {
 			returnBlock = convertToJsonBlock(textBlock);
-		} else if( MIME.isXml(mime) ) {
+		} else if( configer.isMimeXml(mime) ) {
 			returnBlock = convertToXmlBlock(textBlock);
 		} else {
 			returnBlock = textBlock;

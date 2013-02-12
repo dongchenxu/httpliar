@@ -33,6 +33,7 @@ public class DefaultCachedExchangeFactory implements CachedExchangeFactory {
 
 	private static final Logger logger = LoggerFactory.getLogger("httpliar");
 	
+	private final Configer _configer;
 	private final List<HttpRequestHandler> _httpRequestHandlers;
 	private final List<HttpResponseHandler> _httpResponseHandlers;
 	
@@ -67,8 +68,10 @@ public class DefaultCachedExchangeFactory implements CachedExchangeFactory {
 	}
 	
 	public DefaultCachedExchangeFactory(
+			final Configer _configer,
 			final List<HttpRequestHandler> _httpRequestHandlers,
 			final List<HttpResponseHandler> _httpResponseHandlers) {
+		this._configer = _configer;
 		this._httpRequestHandlers = _httpRequestHandlers;
 		this._httpResponseHandlers = _httpResponseHandlers;
 	}
@@ -81,6 +84,7 @@ public class DefaultCachedExchangeFactory implements CachedExchangeFactory {
 		
 		final InputStream bpIn = bpRequest.getInputStream();
 		final HttpLiarExchange exchange = new HttpLiarExchange(
+				_configer,
 				_httpRequestHandlers,
 				_httpResponseHandlers,
 				_DontProxyToBrowserHeaders,

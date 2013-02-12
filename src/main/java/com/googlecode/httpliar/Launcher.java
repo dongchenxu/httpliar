@@ -1,7 +1,10 @@
 package com.googlecode.httpliar;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.math.NumberUtils;
 
 import com.googlecode.httpliar.util.JvmUtils;
 import com.googlecode.httpliar.util.JvmUtils.ShutdownHook;
@@ -12,23 +15,22 @@ import com.googlecode.httpliar.util.JvmUtils.ShutdownHook;
  */
 public class Launcher {
 	
-	private static final int DEFAULT_PROXY_PORT = 9666;
-	
 	/**
-	 * 从参数中解析代理端口
+	 * 从参数中解析配置文件
 	 * @param args
 	 * @return
+	 * @throws IOException
 	 */
-	private static int getProxyPort(String[] args) {
+	private static Configer getConfiger(String[] args) throws IOException {
 		if( ArrayUtils.isNotEmpty(args) ) {
-			NumberUtils.toInt(args[0], DEFAULT_PROXY_PORT);
+			return Configer.loadConfiger(new FileInputStream(new File(args[0])));
 		}
-		return DEFAULT_PROXY_PORT;
+		return Configer.loadDefaultConfiger();
 	}
 	
 	public static void main(String[] args) throws Exception {
-		final int port = getProxyPort(args);
-		final HttpLiarServer server = new HttpLiarServer(port);
+		final Configer configer = getConfiger(args);
+		final HttpLiarServer server = new HttpLiarServer(configer);
 		
 		JvmUtils.registShutdownHook("httpliar-shutdown", new ShutdownHook(){
 

@@ -45,8 +45,9 @@ public class HttpLiarProxyServlet implements Servlet {
 	private final List<HttpResponseHandler> _httpResponseHandlers = new ArrayList<HttpResponseHandler>();
 	private CachedExchangeFactory _httpExchangeFactory;
 
-	private ServletConfig _config;
-	private ServletContext _context;
+	private Configer _configer;
+	private ServletConfig _servletConfig;
+	private ServletContext _servletContext;
 
 	/* ------------------------------------------------------------ */
 	/*
@@ -54,20 +55,21 @@ public class HttpLiarProxyServlet implements Servlet {
 	 * 
 	 * @see javax.servlet.Servlet#init(javax.servlet.ServletConfig)
 	 */
-	public void init(ServletConfig config) throws ServletException {
-		_config = config;
-		_context = config.getServletContext();
+	public void init(ServletConfig servletConfig) throws ServletException {
+		_servletConfig = servletConfig;
+		_servletContext = servletConfig.getServletContext();
 		_httpExchangeFactory = new DefaultCachedExchangeFactory(
+				_configer,
 				_httpRequestHandlers, _httpResponseHandlers);
 
 		try {
 
-			_client = createHttpClient(config);
+			_client = createHttpClient(servletConfig);
 
-			if (_context != null) {
-				_context.setAttribute(config.getServletName() + ".ThreadPool",
+			if (_servletContext != null) {
+				_servletContext.setAttribute(servletConfig.getServletName() + ".ThreadPool",
 						_client.getThreadPool());
-				_context.setAttribute(config.getServletName() + ".HttpClient",
+				_servletContext.setAttribute(servletConfig.getServletName() + ".HttpClient",
 						_client);
 			}
 
@@ -153,7 +155,7 @@ public class HttpLiarProxyServlet implements Servlet {
 	 * @see javax.servlet.Servlet#getServletConfig()
 	 */
 	public ServletConfig getServletConfig() {
-		return _config;
+		return _servletConfig;
 	}
 
 	/* ------------------------------------------------------------ */
@@ -304,6 +306,14 @@ public class HttpLiarProxyServlet implements Servlet {
 	 */
 	public List<HttpResponseHandler> getHttpResponseHandlers() {
 		return _httpResponseHandlers;
+	}
+	
+	/**
+	 * 设置配置参数
+	 * @param configer
+	 */
+	public void setConfiger(Configer configer) {
+		this._configer = configer;
 	}
 	
 }

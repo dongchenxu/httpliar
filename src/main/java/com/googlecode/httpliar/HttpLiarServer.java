@@ -16,6 +16,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.googlecode.httpliar.handler.HtmlLiarMarkHttpResponseHandler;
 import com.googlecode.httpliar.handler.HttpRequestHandler;
 import com.googlecode.httpliar.handler.HttpResponseHandler;
 import com.googlecode.httpliar.handler.TextHttpResponseHandler;
@@ -30,14 +31,14 @@ public class HttpLiarServer {
 
 	private static final Logger logger = LoggerFactory.getLogger("httpliar");
 	
-	private final int port;			//代理端口
+	private final Configer configer;
 	private final Server server;	//代理服务器
 	private final ArrayList<HttpRequestHandler> httpRequestHandlers = new ArrayList<HttpRequestHandler>();
 	private final ArrayList<HttpResponseHandler> httpResponseHandlers = new ArrayList<HttpResponseHandler>();
 	
 	@SuppressWarnings("unchecked")
-	public HttpLiarServer(final int port) {
-		this(port, ListUtils.EMPTY_LIST, ListUtils.EMPTY_LIST);
+	public HttpLiarServer(final Configer configer) {
+		this(configer, ListUtils.EMPTY_LIST, ListUtils.EMPTY_LIST);
 	}
 	
 	/**
@@ -46,10 +47,10 @@ public class HttpLiarServer {
 	 * @param httpRequestHandlers
 	 * @param httpResponseHandlers
 	 */
-	public HttpLiarServer(final int port, 
+	public HttpLiarServer(final Configer configer,
 			final List<HttpRequestHandler> httpRequestHandlers, 
 			final List<HttpResponseHandler> httpResponseHandlers) {
-		this.port = port;
+		this.configer = configer;
 		server = new Server();
 		this.httpRequestHandlers.addAll(httpRequestHandlers);
 		this.httpResponseHandlers.addAll(httpResponseHandlers);
@@ -62,7 +63,7 @@ public class HttpLiarServer {
 	public void startProxy() throws Exception {
 		
 		SelectChannelConnector connector = new SelectChannelConnector();
-        connector.setPort(port);
+        connector.setPort(configer.getProxyPort());
         server.addConnector(connector);
 
         HandlerCollection handlers = new HandlerCollection();
@@ -79,6 +80,9 @@ public class HttpLiarServer {
 				final Servlet servlet = super.newInstance();
 				if( HttpLiarProxyServlet.class.isAssignableFrom(this._class)  ) {
 					final HttpLiarProxyServlet httpLiarProxyServlet = (HttpLiarProxyServlet)servlet;
+					
+					// inject configer
+					httpLiarProxyServlet.setConfiger(configer);
 					
 					// inject requestHandlers
 					injectHttpRequestHandlers(httpLiarProxyServlet.getHttpRequestHandlers());
@@ -97,7 +101,7 @@ public class HttpLiarServer {
         handlers.addHandler(new ConnectHandler());
         server.start();
 		
-		logger.info("httpliar[port={}] started!", port);
+		logger.info("httpliar[port={}] started!", configer.getProxyPort());
 	}
 	
 	/**
@@ -109,7 +113,7 @@ public class HttpLiarServer {
 			server.stop();
 			server.destroy();
 		}
-		logger.info("httpliar[port={}] stoped!", port);
+		logger.info("httpliar[port={}] stoped!", configer.getProxyPort());
 	}
 	
 	/**
@@ -127,6 +131,7 @@ public class HttpLiarServer {
 	private void injectHttpResponseHandlers(List<HttpResponseHandler> handlers) {
 		handlers.add(new UnCompressHttpResponseHandler());
 		handlers.add(new TextHttpResponseHandler());
+		handlers.add(new HtmlLiarMarkHttpResponseHandler());
 		handlers.addAll(httpResponseHandlers);
 	}
 	

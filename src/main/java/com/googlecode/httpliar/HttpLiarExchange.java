@@ -32,7 +32,6 @@ import com.googlecode.httpliar.handler.HttpResponseHandler;
 import com.googlecode.httpliar.handler.RequestHandlerResult;
 import com.googlecode.httpliar.handler.ResponseHandlerResult;
 import com.googlecode.httpliar.handler.block.DataBlock;
-import com.googlecode.httpliar.mime.MIME;
 import com.googlecode.httpliar.util.HttpUtils;
 
 /**
@@ -45,6 +44,7 @@ public class HttpLiarExchange extends CachedExchange {
 	
 	private static final Logger logger = LoggerFactory.getLogger("httpliar");
 	
+	private final Configer _configer;
 	private final List<HttpRequestHandler> _httpRequestHandlers;
 	private final List<HttpResponseHandler> _httpResponseHandlers;
 	private final HashSet<String> _dontProxyToBrowserHeaders;
@@ -57,12 +57,14 @@ public class HttpLiarExchange extends CachedExchange {
 	private Buffer _waitForCompletedBuffer;		//数据缓存对象
 
 	public HttpLiarExchange(
+			final Configer configer,
 			final List<HttpRequestHandler> _httpRequestHandlers,
 			final List<HttpResponseHandler> _httpResponseHandlers,
 			final HashSet<String> _DontProxyToBrowserHeaders,
 			final HttpServletRequest bpRequest,
 			final HttpServletResponse bpResponse) throws IOException {
 		super(true);
+		this._configer = configer;
 		this._httpRequestHandlers = _httpRequestHandlers;
 		this._httpResponseHandlers = _httpResponseHandlers;
 		this._dontProxyToBrowserHeaders = _DontProxyToBrowserHeaders;
@@ -125,7 +127,7 @@ public class HttpLiarExchange extends CachedExchange {
 			getRequestURL(),
 			mime
 		});
-		_waitForCompleted = MIME.isSupport(mime);
+		_waitForCompleted = _configer.isMimeSupport(mime);
 		_waitForCompletedBuffer = createBuffer(_waitForCompleted);
 		
 	}
@@ -395,6 +397,14 @@ public class HttpLiarExchange extends CachedExchange {
 	 */
 	public String getRequestURL() {
 		return _bpRequest.getRequestURL().toString();
+	}
+	
+	/**
+	 * 获取配置文件
+	 * @return
+	 */
+	public Configer getConfiger() {
+		return _configer;
 	}
 
 }

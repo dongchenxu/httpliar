@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<httpliar>
+	
+	<!-- 代理服务器配置 -->
+	<proxy-config>
+		<!-- 代理端口 -->
+		<proxy-port>9666</proxy-port>
+	</proxy-config>
+	
+	
+	<!-- mime类型配置 -->
+	<mimes-config>
+		
+		<mimes type="html">
+			<mime>text/html</mime>
+		</mimes>
+		
+		<mimes type="xml">
+			<mime>text/xml</mime>
+			<mime>application/xhtml+xml</mime>
+			<mime>application/xml</mime>
+		</mimes>
+		
+		<mimes type="css">
+			<mime>text/css</mime>
+		</mimes>
+		
+		<mimes type="json">
+			<mime>application/json</mime>
+		</mimes>
+		
+		<mimes type="text">
+			<mime>text/plain</mime>
+			<mime>text/javascript</mime>
+			<mime>application/x-javascript</mime>
+		</mimes>
+		
+	</mimes-config>
+	
+</httpliar>

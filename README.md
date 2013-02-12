@@ -43,6 +43,7 @@ HTTP的应答会在压缩之后拆分成多个Chunked的方式进行传递，作
 ./java -jar httpliar.jar [代理端口，默认为9666]
 ```
 
+## 内嵌运行
 作为内嵌应用，HttpLiar已经上传到Maven中心仓库
 在pom.xml中添加
 ```

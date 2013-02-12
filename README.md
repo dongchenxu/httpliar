@@ -40,7 +40,7 @@ HTTP的应答会在压缩之后拆分成多个Chunked的方式进行传递，作
 
 作为独立的HttpProxy进行部署
 ```
-./java -jar httpliar.jar [代理端口，默认为9666]
+./java -jar httpliar-jar-with-dependencies.jar
 ```
 
 ## 内嵌运行

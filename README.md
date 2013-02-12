@@ -31,5 +31,45 @@ HttpLiar是基于HttpProxy的工作模式，所以数据流转中也承担着承
 ## 内部原理
 HTTP的应答会在压缩之后拆分成多个Chunked的方式进行传递，作为一个Proxy如果不需要关注内部数据只需要将流经的数据包最快的传走即可。但对于HttpLiar而言我们需要了解和修改应答的数据，所以HttpLiar需要对流经的数据像浏览器进行整合处理。这也是HttpLiar为什么性能提升不上来的原因。
 
+![Logo](http://pic.yupoo.com/oldmanpushcart/CDvCpwiP/medium.jpg)
+
+对于应答所返回的数据，HttpLiar抽象成了DataBlock（二进制块）。
+![Logo](http://pic.yupoo.com/oldmanpushcart/CDvFY9po/medish.jpg)
+
+## 独立运行
+
+作为独立的HttpProxy进行部署
+```
+./java -jar httpliar.jar [代理端口，默认为9666]
+```
+
+作为内嵌应用，HttpLiar已经上传到Maven中心仓库
+在pom.xml中添加
+```
+<dependency>
+  <groupId>com.googlecode.httpliar</groupId>
+  <artifactId>httpliar</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+编写Java代码
+```
+public static void main(String[] args) throws Exception {
+		
+  final HttpLiarServer server = new HttpLiarServer(9666);
+  
+		JvmUtils.registShutdownHook("httpliar-shutdown", new ShutdownHook(){
+
+			@Override
+			public void shutdown() throws Throwable {
+				server.stopProxy();
+			}
+			
+		});
+		
+		server.startProxy();
+		
+	}
+```
 
 

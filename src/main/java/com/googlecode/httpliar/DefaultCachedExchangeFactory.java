@@ -64,7 +64,7 @@ public class DefaultCachedExchangeFactory implements CachedExchangeFactory {
 //		_DontProxyToBrowserHeaders.add("Expires");
 //		_DontProxyToBrowserHeaders.add("Cache-Control");
 //		_DontProxyToBrowserHeaders.add("ETag");
-//		_DontProxyToBrowserHeaders.add("Content-Length");
+		_DontProxyToBrowserHeaders.add("Content-Length");
 	}
 	
 	public DefaultCachedExchangeFactory(

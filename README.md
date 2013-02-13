@@ -76,8 +76,9 @@ public static void main(String[] args) throws Exception {
 		public ResponseHandlerResult handleResponse(
 				HttpLiarExchange exchange, DataBlock block)
 				throws Exception {
-			exchange.getResponseFields().remove("Content-Length");
-			return new ResponseHandlerResult(block);
+			final ResponseHandlerResult result = new ResponseHandlerResult(block);
+			result.removeHeader("Content-Length");
+			return result;
 		}
 		
 	});

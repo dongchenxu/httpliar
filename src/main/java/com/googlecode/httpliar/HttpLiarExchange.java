@@ -22,7 +22,6 @@ import org.eclipse.jetty.continuation.ContinuationSupport;
 import org.eclipse.jetty.http.HttpURI;
 import org.eclipse.jetty.io.Buffer;
 import org.eclipse.jetty.io.EofException;
-import org.eclipse.jetty.io.nio.RandomAccessFileBuffer;
 import org.eclipse.jetty.util.IO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -214,6 +213,10 @@ public class HttpLiarExchange extends CachedExchange {
 			}
 		} finally {
 			_bpRequestContinuation.complete();
+			if( null != _waitForCompletedBuffer
+					&& _waitForCompletedBuffer instanceof FixedRandomAccessFileBuffer ) {
+				((FixedRandomAccessFileBuffer)_waitForCompletedBuffer).close();
+			}
 		}
 	}
 
@@ -278,12 +281,12 @@ public class HttpLiarExchange extends CachedExchange {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	private RandomAccessFileBuffer createBuffer(final boolean waitForCompleted) throws FileNotFoundException,
+	private FixedRandomAccessFileBuffer createBuffer(final boolean waitForCompleted) throws FileNotFoundException,
 			IOException {
 		if( !waitForCompleted ) {
 			return null;
 		}
-		return new RandomAccessFileBuffer(File.createTempFile("__HTTPFILTER_", "temp_"+System.currentTimeMillis()));
+		return new FixedRandomAccessFileBuffer(File.createTempFile("__HTTPFILTER_", "temp_"+System.currentTimeMillis()));
 	}
 
 	/**

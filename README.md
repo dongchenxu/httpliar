@@ -40,7 +40,7 @@ HTTP的应答会在压缩之后拆分成多个Chunked的方式进行传递，作
 
 作为独立的HttpProxy进行部署
 ```
-./java -jar httpliar.jar [代理端口，默认为9666]
+./java -jar httpliar-jar-with-dependencies.jar
 ```
 
 ## 内嵌运行
@@ -57,8 +57,34 @@ HTTP的应答会在压缩之后拆分成多个Chunked的方式进行传递，作
 ```
 public static void main(String[] args) throws Exception {
 	
-	final Configer configer = Configer.loadDefaultConfiger();
-	final HttpLiarServer server = new HttpLiarServer(configer);
+	final Configer configer = getConfiger(args);
+	
+	
+	// 在1.0.0的版本中有一个bug，在Response的Header中忘记去掉了Content-Length
+	// 可能会导致部分浏览器进行长度校验失败，从而导致网页无法正常显示
+	// 所以在这里需要主动添加一个ResponseHandler，对Content-Length主动进行删除
+	// 在1.0.0（不含1.0.0）之后的版本中会修复这个问题
+	final List<HttpResponseHandler> handlers = new ArrayList<HttpResponseHandler>();
+	handlers.add(new HttpResponseHandler(){
+
+		@Override
+		public boolean isHandleResponse(HttpLiarExchange exchange) {
+			return true;
+		}
+
+		@Override
+		public ResponseHandlerResult handleResponse(
+				HttpLiarExchange exchange, DataBlock block)
+				throws Exception {
+			final ResponseHandlerResult result = new ResponseHandlerResult(block);
+			result.removeHeader("Content-Length");
+			return result;
+		}
+		
+	});
+	
+	@SuppressWarnings("unchecked")
+	final HttpLiarServer server = new HttpLiarServer(configer, ListUtils.EMPTY_LIST, handlers);
 	
 	JvmUtils.registShutdownHook("httpliar-shutdown", new ShutdownHook(){
 

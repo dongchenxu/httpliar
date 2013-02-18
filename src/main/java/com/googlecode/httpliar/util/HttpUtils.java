@@ -19,6 +19,19 @@ public class HttpUtils {
 	public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 	
 	/**
+	 * 判断在HTTP应答头部是否已经指定了字符编码
+	 * @param fields
+	 * @return
+	 */
+	public static boolean isCharsetInResponseHeader(HttpFields fields) {
+		final String contentTypeString = fields.getStringField("Content-Type");
+		if( StringUtils.isBlank(contentTypeString) ) {
+			return false;
+		}
+        return StringUtils.containsIgnoreCase(contentTypeString, "charset=");
+	}
+	
+	/**
 	 * 从ContentType中获取字符编码
 	 * @param fields
 	 * @return

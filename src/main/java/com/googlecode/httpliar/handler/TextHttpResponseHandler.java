@@ -54,6 +54,12 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 	public ResponseHandlerResult handleResponse(HttpLiarExchange exchange,
 			DataBlock block) throws Exception {
 		
+		/*
+		 * version 1.0.2
+		 * 修复问题：当http response指定的字符编码和html.meta中不一致时，应该以http response中的为准
+		 */
+		final boolean isCharsetInResponse = HttpUtils.isCharsetInResponseHeader(exchange.getResponseFields());
+		
 		final Charset charset = HttpUtils.getCharset(exchange.getResponseFields(), HttpUtils.DEFAULT_CHARSET);
 		final TextBlock textBlock = new TextBlock(block.getDatas(), charset);
 		final String mime = HttpUtils.getMIME(exchange.getResponseFields());
@@ -61,7 +67,7 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 		
 		TextBlock returnBlock;
 		if( configer.isMimeHtml(mime) ) {
-			returnBlock = convertToHtmlBlock(textBlock, block);
+			returnBlock = convertToHtmlBlock(textBlock, block, isCharsetInResponse);
 			// 这里对不规范的网站进行一个校验，有些网站明着传递text/html，其实背地里做着json的勾当
 //			final String htmlStr = StringUtils.trimToEmpty(((HtmlBlock)returnBlock).getDocument().text());
 //			final String textStr = StringUtils.trimToEmpty(textBlock.getText());
@@ -94,29 +100,41 @@ public class TextHttpResponseHandler implements HttpResponseHandler {
 		return result;
 	}
 	
-	private HtmlBlock convertToHtmlBlock(final TextBlock textBlock, final DataBlock block) {
+	/**
+	 * 转换到HTML BLOCK
+	 * @param textBlock 已经按字符编码转换过的text block
+	 * @param block 原data block
+	 * @param isCharsetInResponse 是否在response中已经指定了字符编码
+	 * @return
+	 */
+	private HtmlBlock convertToHtmlBlock(final TextBlock textBlock, final DataBlock block, final boolean isCharsetInResponse) {
 		final HtmlBlock html = new HtmlBlock(textBlock.getText(), textBlock.getCharset());
 		final Document doc = html.getDocument();
 		
 		Charset htmlCharset = textBlock.getCharset();
 		
 		/*
-		 * 解析 <meta http-equiv="content-type" content="text/html; charset=gbk"/>
+		 * 如果没response中没指定字符编码，此时才需要从html中进行解析
 		 */
-		final Element metaCtEle = doc.select("meta[HTTP-EQUIV=content-type]").first();
-		if( null != metaCtEle ) {
-			htmlCharset = HttpUtils.getCharset(metaCtEle.attr("content"), htmlCharset);
-		}
-		
-		/*
-		 * 解析 <meta charset="gbk"/>
-		 */
-		final Element metaChEle = doc.select("meta[charset]").first();
-		if( null != metaChEle ) {
-			try {
-				htmlCharset = Charset.forName(metaChEle.attr("charset"));
-			} catch(Exception e) {
-				// ingore
+		if( !isCharsetInResponse ) {
+			/*
+			 * 解析 <meta http-equiv="content-type" content="text/html; charset=gbk"/>
+			 */
+			final Element metaCtEle = doc.select("meta[HTTP-EQUIV=content-type]").first();
+			if( null != metaCtEle ) {
+				htmlCharset = HttpUtils.getCharset(metaCtEle.attr("content"), htmlCharset);
+			}
+			
+			/*
+			 * 解析 <meta charset="gbk"/>
+			 */
+			final Element metaChEle = doc.select("meta[charset]").first();
+			if( null != metaChEle ) {
+				try {
+					htmlCharset = Charset.forName(metaChEle.attr("charset"));
+				} catch(Exception e) {
+					// ingore
+				}
 			}
 		}
 		

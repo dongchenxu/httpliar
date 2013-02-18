@@ -51,6 +51,7 @@ public class HttpLiarExchange extends CachedExchange {
 	private final HttpServletResponse _bpResponse;
 	private final Continuation _bpRequestContinuation;
 	private final OutputStream _bpOut;
+	private final HttpURI _httpURI;
 	
 	private boolean _waitForCompleted = false;	//是否等待所有chunk完成
 	private Buffer _waitForCompletedBuffer;		//数据缓存对象
@@ -61,7 +62,8 @@ public class HttpLiarExchange extends CachedExchange {
 			final List<HttpResponseHandler> _httpResponseHandlers,
 			final HashSet<String> _DontProxyToBrowserHeaders,
 			final HttpServletRequest bpRequest,
-			final HttpServletResponse bpResponse) throws IOException {
+			final HttpServletResponse bpResponse,
+			final HttpURI httpURI) throws IOException {
 		super(true);
 		this._configer = configer;
 		this._httpRequestHandlers = _httpRequestHandlers;
@@ -71,6 +73,7 @@ public class HttpLiarExchange extends CachedExchange {
 		this._bpResponse = bpResponse;
 		this._bpRequestContinuation = ContinuationSupport.getContinuation(bpRequest);
 		this._bpOut = bpResponse.getOutputStream();
+		this._httpURI = httpURI;
 	}
 	
 	@Override
@@ -399,7 +402,15 @@ public class HttpLiarExchange extends CachedExchange {
 	 * @return
 	 */
 	public String getRequestURL() {
-		return _bpRequest.getRequestURL().toString();
+		return _httpURI.toString();
+	}
+	
+	/**
+	 * 获取请求URL字符信息
+	 * @return
+	 */
+	public HttpURI getHttpURI() {
+		return _httpURI;
 	}
 	
 	/**

@@ -89,7 +89,8 @@ public class DefaultCachedExchangeFactory implements CachedExchangeFactory {
 				_httpResponseHandlers,
 				_DontProxyToBrowserHeaders,
 				bpRequest,
-				bpResponse);
+				bpResponse,
+				httpUri);
 		
 		final String connectionHeader = getConnectionHeader(bpRequest);
 		setupHttpExchange(exchange, httpUri, bpRequest);

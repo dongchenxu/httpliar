@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Entities.EscapeMode;
 
 /**
  * HTML块
@@ -20,6 +21,7 @@ public class HtmlBlock extends TextBlock {
 	public HtmlBlock(String text, Charset charset) {
 		super(text, charset);
 		this.document = Jsoup.parse(text);
+		this.document.outputSettings().escapeMode(EscapeMode.extended);
 	}
 
 	/**

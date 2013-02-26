@@ -9,7 +9,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.googlecode.httpliar</groupId>
 	<artifactId>httpliar</artifactId>
-	<version>1.0.3-SNAPSHOT</version>
+	<version>1.0.3</version>
 	<packaging>jar</packaging>
 
 	<name>httpliar</name>
